@@ -1,11 +1,13 @@
 import datetime
 from pydantic import BaseModel, field_validator
 
+# Схема для возврата значения из эндпоинта /comments
 class CommentsModel(BaseModel):
   commenter_login: str
   post_header: str
   post_author_login: str
   comments_count: int
+
 
 # Для даты можно использовать валидатор для даты, например для преобразования в формат DD-MM-YYYY
 class GeneralModel(BaseModel):
@@ -18,5 +20,16 @@ class GeneralModel(BaseModel):
   # def validate_date(cls, value):
   #   ...
 
-class ErrorModel(BaseModel):
-  error: str = "user not found"
+
+# Модель для создания комментария
+class CreateCommentModel(BaseModel):
+  text: str
+  author: int
+  post: int
+
+
+# Модель для создания записи в логах
+class CreateLogModel(BaseModel):
+  datetime: datetime.datetime
+  user_id: int
+  event_type: int

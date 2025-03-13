@@ -2,8 +2,8 @@ from fastapi import FastAPI
 from typing import AsyncGenerator
 from contextlib import asynccontextmanager
 
-from src.db import init_db_tortoise
-from src.router import router_comments, router_general
+from app.src.db import init_db_tortoise
+from app.src.router import router_comments, router_general
 
 
 @asynccontextmanager

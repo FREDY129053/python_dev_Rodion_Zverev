@@ -13,8 +13,8 @@ TORTOISE_ORM = {
         "authors_database": {
             "engine": "tortoise.backends.asyncpg",
             "credentials": {
-                "host": os.getenv("DB_HOST"),
-                "port": os.getenv("DB_PORT"),
+                "host": os.getenv("DB_HOST_1"),
+                "port": os.getenv("DB_PORT_1"),
                 "user": os.getenv("DB_USER"),
                 "password": os.getenv("DB_PASSWORD"),
                 "database": os.getenv("DB_NAME_1"),
@@ -23,8 +23,8 @@ TORTOISE_ORM = {
         "logs_database": {
             "engine": "tortoise.backends.asyncpg",
             "credentials": {
-                "host": os.getenv("DB_HOST"),
-                "port": os.getenv("DB_PORT"),
+                "host": os.getenv("DB_HOST_2"),
+                "port": os.getenv("DB_PORT_2"),
                 "user": os.getenv("DB_USER"),
                 "password": os.getenv("DB_PASSWORD"),
                 "database": os.getenv("DB_NAME_2"),
@@ -33,11 +33,11 @@ TORTOISE_ORM = {
     },
     "apps": {
         "authors_database": {
-            "models": ["src.db.authors_database.models"],
+            "models": ["app.src.db.authors_database.models"],
             "default_connection": "authors_database",
         },
         "logs_database": {
-            "models": ["src.db.logs_database.models"],
+            "models": ["app.src.db.logs_database.models"],
             "default_connection": "logs_database",
         }
     },
@@ -46,6 +46,7 @@ TORTOISE_ORM = {
 
 async def init_db_tortoise(_app: FastAPI):
     await Tortoise.init(config=TORTOISE_ORM)
+    # Для автоматической генерации описанных схем
     # await Tortoise.generate_schemas()
     register_tortoise(
         app=_app,

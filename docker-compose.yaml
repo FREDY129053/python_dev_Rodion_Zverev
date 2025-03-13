@@ -1,0 +1,54 @@
+services:
+  postgres_1:
+    image: postgres:16
+    container_name: authors_database
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 129053
+      POSTGRES_DB: authors_database
+    volumes:
+      - ./authors_db.sql:/docker-entrypoint-initdb.d/authors_db.sql
+    ports:
+      - "5433:5432"
+    networks:
+      - api_network
+
+  postgres_2:
+    image: postgres:16
+    container_name: logs_database
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 129053
+      POSTGRES_DB: logs_database
+    volumes:
+      - ./logs_db.sql:/docker-entrypoint-initdb.d/logs_db.sql
+    ports:
+      - "5434:5432"
+    networks:
+      - api_network
+
+  api:
+    build: 
+      context: .
+      dockerfile: app/dockerfile
+    container_name: info_api
+    depends_on:
+      - postgres_1
+      - postgres_2
+    environment:
+      DB_HOST_1: authors_database
+      DB_HOST_2: logs_database
+      DB_USER: postgres
+      DB_PASSWORD: 129053
+      DB_PORT_1: 5432
+      DB_PORT_2: 5432
+      DB_NAME_1: authors_database
+      DB_NAME_2: logs_database
+    networks:
+      - api_network
+    ports:
+      - "8080:8080"
+
+networks:
+  api_network:
+    driver: bridge
