@@ -38,9 +38,9 @@ async def getUserCommentsInfo(login: str) -> List[Comment] | None:
   return result
 
 
-async def insertComment(text: str, author: int, post: int) -> Comment:
+async def insertComment(text: str, author: str, post: int) -> Comment:
   """Запись комментария в таблицу"""
-  author = await User.get(id=author)
+  author = await User.get(login=author)
   post = await Post.get(id=post)
   
   return await Comment.create(text=text, author=author, post=post)

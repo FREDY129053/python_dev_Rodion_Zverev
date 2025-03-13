@@ -219,7 +219,7 @@ COPY public.comments (id, text, author_id, post_id) FROM stdin;
 7	comment_7	7	7
 8	comment_8	8	10
 9	comment_9	9	7
-10	comment_10	10	8
+10	comment_10	1	8
 11	comment_11	2	1
 12	comment_12	3	3
 13	comment_13	4	5

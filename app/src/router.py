@@ -16,7 +16,7 @@ router_general = APIRouter(prefix='/api', tags=["General"])
     '/comments', 
     response_model=List[CommentsModel],
     responses={
-      status.HTTP_404_NOT_FOUND: {"description": "user not found"},
+      status.HTTP_404_NOT_FOUND: {"description": "User not found"},
     }
 )
 async def get_comment_info(user_login: str):
@@ -33,7 +33,7 @@ async def get_comment_info(user_login: str):
     '/comments',
     response_model=Dict[str, str],
     responses={
-      status.HTTP_400_BAD_REQUEST: {"description": "invalid data"},
+      status.HTTP_400_BAD_REQUEST: {"description": "Invalid data"},
     },
     status_code=status.HTTP_201_CREATED,
 )
@@ -65,10 +65,10 @@ async def get_general_info(user_login: str | None = None, user_id: int | None = 
 
 
 @router_general.post(
-    '/logs', 
+    '/general', 
     response_model=Dict[str, str],
     responses={
-      status.HTTP_400_BAD_REQUEST: {"description": "invalid data"},
+      status.HTTP_400_BAD_REQUEST: {"description": "Invalid data"},
     },
     status_code=status.HTTP_201_CREATED,
   )

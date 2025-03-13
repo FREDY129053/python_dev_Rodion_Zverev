@@ -24,7 +24,7 @@ class GeneralModel(BaseModel):
 # Модель для создания комментария
 class CreateCommentModel(BaseModel):
   text: str
-  author: int
+  author: str
   post: int
 
 
